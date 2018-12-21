@@ -54,7 +54,7 @@ public:
 	}
 
 	void MergeSort(int low, int high, bool(*lf)(T, T) = [](T a, T b) {return a < b; }) {
-		int* helper = new int[v.size()];
+		T* helper = new T[v.size()];
 		MergeSplit(helper, low, high, lf);
 		delete helper;
 	}

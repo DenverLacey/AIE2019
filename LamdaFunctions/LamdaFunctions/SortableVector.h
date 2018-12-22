@@ -18,8 +18,8 @@ public:
 	void PopBack() { v.pop_back(); }
 
 	void PrintElements() {
-		for (int i = 0; i < v.size(); i++) {
-			std::cout << "[" << v[i] << "]";
+		for (T e : v) {
+			std::cout << "[" << e << "]";
 		}
 
 		std::cout << "\n";

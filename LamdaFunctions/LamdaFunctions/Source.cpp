@@ -1,9 +1,6 @@
 #include <iostream>
 #include <algorithm>
-#include <array>
 #include <chrono>
-#include <random>
-#include <ctime>
 
 #include "myTime.h"
 #include "SortableVector.h"
@@ -18,17 +15,13 @@ void PrintTimes(const vector<myTime*> times) {
 	}
 }
 
-void FindWinner(vector<myTime*> entries) {
+void PrintPlaces(vector<myTime*> entries) {
 
-	myTime small = *entries[0];
+	std::sort(entries.begin(), entries.end(), [](myTime* a, myTime* b) { return a->time < b->time; });
 
-	for (int i = 1; i < entries.size(); i++) {
-		if (small.time > entries[i]->time) {
-			small = *entries[i];
-		}
+	for (int i = 0; i < entries.size(); i++) {
+		cout << i + 1 << ": " << entries[i]->name << ", " << entries[i]->time << "ns.\n";
 	}
-
-	cout << small.name << " was the fastest at " << small.time << "ns.\n";
 }
 
 vector<int> InitialiseRandomVectorOfSize(int size) {
@@ -46,7 +39,7 @@ int main() {
 
 	srand((unsigned)time(0));
 
-	vector<int> randomisedVec = InitialiseRandomVectorOfSize(10);
+	vector<int> randomisedVec = InitialiseRandomVectorOfSize(50);
 	auto lf_compare = [](int a, int b) { return a < b; };
 
 	SortableVector<int> insertionSV(randomisedVec);
@@ -54,6 +47,14 @@ int main() {
 	SortableVector<int> mergeSV(randomisedVec);
 	SortableVector<int> quickSV(randomisedVec);
 	SortableVector<int> algorithmSV(randomisedVec);
+
+	int size = randomisedVec.size();
+
+	for (int n : randomisedVec) {
+		cout << "[" << n << "]";
+	}
+	cout << "\n";
+	randomisedVec.clear();
 
 	// insertion sort
 	auto t1 = std::chrono::steady_clock::now();
@@ -85,18 +86,25 @@ int main() {
 	auto t10 = std::chrono::steady_clock::now();
 	// algorithmSV.PrintElements();
 
-	cout << "No. of elements: " << randomisedVec.size() << "\n";
+	cout << "\n";
+
+	cout << "No. of elements: " << size << "\n";
 
 	vector<myTime*> times;
 
-	times.push_back(new myTime(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count(), (char*)"Insertion Sort"));
-	times.push_back(new myTime(std::chrono::duration_cast<std::chrono::nanoseconds>(t4 - t3).count(), (char*)"Bubble Sort"));
-	times.push_back(new myTime(std::chrono::duration_cast<std::chrono::nanoseconds>(t6 - t5).count(), (char*)"Merge Sort"));
-	times.push_back(new myTime(std::chrono::duration_cast<std::chrono::nanoseconds>(t8 - t7).count(), (char*)"Quick Sort"));
-	times.push_back(new myTime(std::chrono::duration_cast<std::chrono::nanoseconds>(t10 - t9).count(), (char*)"Algorithm Sort"));
+	times.push_back(new myTime(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count(), "Insertion Sort"));
+	times.push_back(new myTime(std::chrono::duration_cast<std::chrono::nanoseconds>(t4 - t3).count(), "Bubble Sort"));
+	times.push_back(new myTime(std::chrono::duration_cast<std::chrono::nanoseconds>(t6 - t5).count(), "Merge Sort"));
+	times.push_back(new myTime(std::chrono::duration_cast<std::chrono::nanoseconds>(t8 - t7).count(), "Quick Sort"));
+	times.push_back(new myTime(std::chrono::duration_cast<std::chrono::nanoseconds>(t10 - t9).count(), "Algorithm Sort"));
+
+	cout << "\n";
 
 	PrintTimes(times);
-	FindWinner(times);
+
+	cout << "\n";
+
+	PrintPlaces(times);
 
 	// delete all times
 	for (myTime* t : times) {
@@ -105,4 +113,6 @@ int main() {
 		}
 	}
 	times.clear();
+
+	return 0;
 }

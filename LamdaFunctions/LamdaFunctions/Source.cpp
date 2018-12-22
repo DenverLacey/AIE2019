@@ -104,4 +104,5 @@ int main() {
 			delete t;
 		}
 	}
+	times.clear();
 }

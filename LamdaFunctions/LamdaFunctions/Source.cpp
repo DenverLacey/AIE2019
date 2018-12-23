@@ -114,5 +114,7 @@ int main() {
 	}
 	times.clear();
 
+	std::cin.get();
+
 	return 0;
 }

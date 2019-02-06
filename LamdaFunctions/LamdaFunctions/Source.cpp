@@ -29,6 +29,7 @@ vector<int> InitialiseRandomVectorOfSize(int size) {
 	for (int i = 0; i < size; i++) {
 		vec.push_back(i + 1);
 	}
+	srand((unsigned)time(0));
 	std::random_shuffle(vec.begin(), vec.end());
 	return vec;
 }
@@ -36,8 +37,6 @@ vector<int> InitialiseRandomVectorOfSize(int size) {
 int main() {
 	// log memory leaks
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
-	srand((unsigned)time(0));
 
 	vector<int> randomisedVec = InitialiseRandomVectorOfSize(50);
 	auto lf_compare = [](int a, int b) { return a < b; };

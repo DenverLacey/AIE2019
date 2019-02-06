@@ -27,9 +27,9 @@ public:
 
 	int Size() { return v.size(); }
 
-	void Sort(bool(*lf)(T, T) = [](T a, T b) {return a < b; }) { std::sort(v.begin(), v.end(), lf); }
+	void Sort(bool(*lf)(T, T) = [](T a, T b) { return a < b; }) { std::sort(v.begin(), v.end(), lf); }
 
-	void InsertionSort(bool(*lf)(T, T) = [](T a, T b) {return a < b; }) {
+	void InsertionSort(bool(*lf)(T, T) = [](T a, T b) { return a < b; }) {
 		for (int i = 1; i < v.size(); i++) {
 			int key = v[i];
 			int j = i - 1;
@@ -41,7 +41,7 @@ public:
 		}
 	}
 
-	void BubbleSort(bool(*lf)(T, T) = [](T a, T b) {return a < b; }) {
+	void BubbleSort(bool(*lf)(T, T) = [](T a, T b) { return a < b; }) {
 		for (int i = 0; i < v.size(); i++) {
 			for (int j = 1; j < v.size(); j++) {
 				if (lf(v[j], v[j - 1])) {
@@ -53,13 +53,13 @@ public:
 		}
 	}
 
-	void MergeSort(int low, int high, bool(*lf)(T, T) = [](T a, T b) {return a < b; }) {
+	void MergeSort(int low, int high, bool(*lf)(T, T) = [](T a, T b) { return a < b; }) {
 		T* helper = new T[v.size()];
 		MergeSplit(helper, low, high, lf);
 		delete helper;
 	}
 
-	void QuickSort(int low, int high, bool(*lf)(T, T) = [](T a, T b) {return a < b; }) {
+	void QuickSort(int low, int high, bool(*lf)(T, T) = [](T a, T b) { return a < b; }) {
 		if (low < high) {
 			// pi is partioning index
 			int pi = Partition(low, high, lf);
@@ -72,7 +72,7 @@ public:
 	}
 
 private:
-	void MergeSplit(T helper[], int low, int high, bool(*lf)(T, T) = [](T a, T b) {return a < b; }) {
+	void MergeSplit(T helper[], int low, int high, bool(*lf)(T, T) = [](T a, T b) { return a < b; }) {
 		if (low < high) {
 			int middle = (high + low) / 2;
 			MergeSplit(helper, low, middle, lf);
@@ -81,7 +81,7 @@ private:
 		}
 	}
 
-	void Merge(T helper[], int low, int middle, int high, bool(*lf)(T, T) = [](T a, T b) {return a < b; }) {
+	void Merge(T helper[], int low, int middle, int high, bool(*lf)(T, T) = [](T a, T b) { return a < b; }) {
 		for (int i = low; i <= high; i++) {
 			helper[i] = v[i];
 		}
@@ -109,7 +109,7 @@ private:
 	array, and places all smaller (smaller than pivot)
 	to left of pivot and all greater elements to right
 	of pivot */
-	int Partition(int low, int high, bool(*lf)(T, T) = [](T a, T b) {return a < b; }) {
+	int Partition(int low, int high, bool(*lf)(T, T) = [](T a, T b) { return a < b; }) {
 		// pivot
 		T pivot = v[high];
 

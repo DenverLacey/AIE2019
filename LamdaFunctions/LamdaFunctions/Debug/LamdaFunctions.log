@@ -1,27 +1,27 @@
 ﻿  Source.cpp
-c:\users\denver\desktop\school\aie\aie 2019\repository\trunk\lamdafunctions\lamdafunctions\source.cpp(22): warning C4018: '<': signed/unsigned mismatch
-c:\users\denver\desktop\school\aie\aie 2019\repository\trunk\lamdafunctions\lamdafunctions\sortablevector.h(45): warning C4018: '<': signed/unsigned mismatch
-  c:\users\denver\desktop\school\aie\aie 2019\repository\trunk\lamdafunctions\lamdafunctions\sortablevector.h(44): note: while compiling class template member function 'void SortableVector<int>::BubbleSort(bool (__cdecl *)(T,T))'
+l:\2019repos\lamdafunctions\lamdafunctions\source.cpp(22): warning C4018: '<': signed/unsigned mismatch
+l:\2019repos\lamdafunctions\lamdafunctions\sortablevector.h(45): warning C4018: '<': signed/unsigned mismatch
+  l:\2019repos\lamdafunctions\lamdafunctions\sortablevector.h(44): note: while compiling class template member function 'void SortableVector<int>::BubbleSort(bool (__cdecl *)(T,T))'
           with
           [
               T=int
           ]
-  c:\users\denver\desktop\school\aie\aie 2019\repository\trunk\lamdafunctions\lamdafunctions\source.cpp(67): note: see reference to function template instantiation 'void SortableVector<int>::BubbleSort(bool (__cdecl *)(T,T))' being compiled
+  l:\2019repos\lamdafunctions\lamdafunctions\source.cpp(66): note: see reference to function template instantiation 'void SortableVector<int>::BubbleSort(bool (__cdecl *)(T,T))' being compiled
           with
           [
               T=int
           ]
-  c:\users\denver\desktop\school\aie\aie 2019\repository\trunk\lamdafunctions\lamdafunctions\source.cpp(45): note: see reference to class template instantiation 'SortableVector<int>' being compiled
-c:\users\denver\desktop\school\aie\aie 2019\repository\trunk\lamdafunctions\lamdafunctions\sortablevector.h(46): warning C4018: '<': signed/unsigned mismatch
-c:\users\denver\desktop\school\aie\aie 2019\repository\trunk\lamdafunctions\lamdafunctions\sortablevector.h(33): warning C4018: '<': signed/unsigned mismatch
-  c:\users\denver\desktop\school\aie\aie 2019\repository\trunk\lamdafunctions\lamdafunctions\sortablevector.h(32): note: while compiling class template member function 'void SortableVector<int>::InsertionSort(bool (__cdecl *)(T,T))'
+  l:\2019repos\lamdafunctions\lamdafunctions\source.cpp(44): note: see reference to class template instantiation 'SortableVector<int>' being compiled
+l:\2019repos\lamdafunctions\lamdafunctions\sortablevector.h(46): warning C4018: '<': signed/unsigned mismatch
+l:\2019repos\lamdafunctions\lamdafunctions\sortablevector.h(33): warning C4018: '<': signed/unsigned mismatch
+  l:\2019repos\lamdafunctions\lamdafunctions\sortablevector.h(32): note: while compiling class template member function 'void SortableVector<int>::InsertionSort(bool (__cdecl *)(T,T))'
           with
           [
               T=int
           ]
-  c:\users\denver\desktop\school\aie\aie 2019\repository\trunk\lamdafunctions\lamdafunctions\source.cpp(61): note: see reference to function template instantiation 'void SortableVector<int>::InsertionSort(bool (__cdecl *)(T,T))' being compiled
+  l:\2019repos\lamdafunctions\lamdafunctions\source.cpp(60): note: see reference to function template instantiation 'void SortableVector<int>::InsertionSort(bool (__cdecl *)(T,T))' being compiled
           with
           [
               T=int
           ]
-  LamdaFunctions.vcxproj -> C:\Users\Denver\Desktop\School\AIE\AIE 2019\Repository\trunk\LamdaFunctions\Debug\LamdaFunctions.exe
+  LamdaFunctions.vcxproj -> L:\2019REPOS\LamdaFunctions\Debug\LamdaFunctions.exe

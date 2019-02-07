@@ -1,5 +1,6 @@
-# Created by https://www.gitignore.io/api/c++,visualstudio
-# Edit at https://www.gitignore.io/?templates=c++,visualstudio
+
+# Created by https://www.gitignore.io/api/c++,windows,visualstudio
+# Edit at https://www.gitignore.io/?templates=c++,windows,visualstudio
 
 ### C++ ###
 # Prerequisites
@@ -34,6 +35,31 @@
 *.exe
 *.out
 *.app
+
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
 
 ### VisualStudio ###
 ## Ignore Visual Studio temporary files, build results, and
@@ -376,4 +402,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
-# End of https://www.gitignore.io/api/c++,visualstudio
+# End of https://www.gitignore.io/api/c++,windows,visualstudio

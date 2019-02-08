@@ -14,8 +14,8 @@ protected:
 
 public:
 	virtual void fixedUpdate(const glm::vec2& gravity, float timeStep) = 0;
-	virtual void debug() = 0;
-	virtual void makeGizmo() = 0;
+	virtual void debug() const = 0;
+	virtual void makeGizmo() const = 0;
 	virtual void resetPosition() {}
 
 protected:

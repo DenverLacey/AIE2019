@@ -3,7 +3,11 @@
 #include "Application.h"
 #include "Renderer2D.h"
 
-#include "PhysicsScene.h"
+#include <vector>
+#include <glm\ext.hpp>
+
+class PhysicsScene;
+class Sphere;
 
 class PhysicsAndFixedTimeStepApp : public aie::Application {
 public:
@@ -23,4 +27,7 @@ protected:
 	aie::Font*			m_font;
 
 	PhysicsScene* m_physicsScene;
+	Sphere* m_rocket;
+
+	std::vector<glm::vec2*> m_fuel;
 };

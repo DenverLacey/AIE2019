@@ -22,6 +22,8 @@ public:
 	void setTimeStep(const float timeStep);
 	float getTimeStep() const;
 
+	void debugScene() const;
+
 protected:
 	glm::vec2 m_gravity;
 	float m_timeStep;

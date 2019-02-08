@@ -8,11 +8,13 @@ public:
 	~Sphere();
 
 public:
-	void makeGizmo() override;
-	bool checkCollision(PhysicsObject* pOther) override;
+	void makeGizmo() const override;
+	bool checkCollision(PhysicsObject* pOther) const override;
 
 	float getRadius() const;
 	glm::vec4 getColour() const;
+
+	void debug() const override;
 
 protected:
 	float m_radius;

@@ -43,3 +43,8 @@ float Rigidbody::getMass() const {
 	return m_mass;
 }
 
+void Rigidbody::setMass(float mass)
+{
+	m_mass = mass;
+}
+

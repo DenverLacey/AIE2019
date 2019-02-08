@@ -6,7 +6,7 @@ int main() {
 	auto app = new PhysicsAndFixedTimeStepApp();
 
 	// initialise and loop
-	app->run("AIE", 1280, 720, false);
+	app->run("ARK: Physics & Fixed Time Step", 1280, 720, false);
 
 	// deallocation
 	delete app;

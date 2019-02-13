@@ -27,15 +27,21 @@
     <ClCompile Include="..\PhysicsAndFixedTimeStep\PhysicsScene.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="..\PhysicsAndFixedTimeStep\Rigidbody.cpp">
+    <ClCompile Include="..\PhysicsAndFixedTimeStep\Sphere.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="..\PhysicsAndFixedTimeStep\Sphere.cpp">
+    <ClCompile Include="..\PhysicsAndFixedTimeStep\Plane.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PhysicsAndFixedTimeStep\Rigidbody.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ProjectilePhysicsApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

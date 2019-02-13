@@ -18,7 +18,7 @@ void Sphere::makeGizmo() const {
 
 bool Sphere::checkCollision(PhysicsObject* pOther) const {
 	
-	Sphere* other = reinterpret_cast<Sphere*>(pOther);
+	Sphere* other = dynamic_cast<Sphere*>(pOther);
 
 	if (other != nullptr) {
 		float combinedRadius = m_radius + other->m_radius;

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8FAED976-EDC4-434B-ABBC-A2AF77D93142}</ProjectGuid>
+    <ProjectGuid>{DEE5F10B-6128-499C-999B-2EFEB7EDAC29}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ProjectilePhysics</RootNamespace>
+    <RootNamespace>CollisionDetection</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -104,7 +104,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)PhysicsAndFixedTimeStep\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)PhysicsAndFixedTimeStep</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -122,7 +122,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)PhysicsAndFixedTimeStep\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)PhysicsAndFixedTimeStep</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -140,7 +140,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)PhysicsAndFixedTimeStep\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)PhysicsAndFixedTimeStep</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -158,7 +158,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)PhysicsAndFixedTimeStep\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)PhysicsAndFixedTimeStep</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -170,12 +170,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\PhysicsAndFixedTimeStep\AABB.cpp" />
     <ClCompile Include="..\PhysicsAndFixedTimeStep\PhysicsScene.cpp" />
     <ClCompile Include="..\PhysicsAndFixedTimeStep\Plane.cpp" />
     <ClCompile Include="..\PhysicsAndFixedTimeStep\Rigidbody.cpp" />
     <ClCompile Include="..\PhysicsAndFixedTimeStep\Sphere.cpp" />
+    <ClCompile Include="CollisionDetectionApp.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ProjectilePhysicsApp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CollisionDetectionApp.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bootstrap\Bootstrap.vcxproj">
@@ -184,10 +188,6 @@
     <ProjectReference Include="..\PhysicsAndFixedTimeStep\PhysicsAndFixedTimeStep.vcxproj">
       <Project>{dea49362-b428-4215-8d64-4ea0b4ff0858}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Constants.h" />
-    <ClInclude Include="ProjectilePhysicsApp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

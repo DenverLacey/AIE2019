@@ -13,50 +13,35 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{479e332a-d01e-4cd8-a3e1-174bec6099dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PhysicsAndFixedTimeStepApp.cpp">
+    <ClCompile Include="CollisionDetectionApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsScene.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\PhysicsAndFixedTimeStep\PhysicsScene.cpp">
+      <Filter>Source Files\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Rigidbody.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\PhysicsAndFixedTimeStep\Sphere.cpp">
+      <Filter>Source Files\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\PhysicsAndFixedTimeStep\Plane.cpp">
+      <Filter>Source Files\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Plane.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\PhysicsAndFixedTimeStep\Rigidbody.cpp">
+      <Filter>Source Files\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="AABB.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\PhysicsAndFixedTimeStep\AABB.cpp">
+      <Filter>Source Files\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PhysicsAndFixedTimeStepApp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Rigidbody.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AABB.h">
+    <ClInclude Include="CollisionDetectionApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

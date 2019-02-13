@@ -3,15 +3,13 @@
 #include "Application.h"
 #include "Renderer2D.h"
 
-#include <glm\ext.hpp>
-
 class PhysicsScene;
 
-class ProjectilePhysicsApp : public aie::Application {
+class CollisionDetectionApp : public aie::Application {
 public:
 
-	ProjectilePhysicsApp();
-	virtual ~ProjectilePhysicsApp();
+	CollisionDetectionApp();
+	virtual ~CollisionDetectionApp();
 
 	virtual bool startup();
 	virtual void shutdown();
@@ -19,12 +17,10 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
-	void setupContinuousDemo(const glm::vec2& startPos, float inclination, float speed, float gravity);
-
 protected:
 
 	aie::Renderer2D*	m_2dRenderer;
 	aie::Font*			m_font;
 
-	PhysicsScene* m_physicsScene;
+	PhysicsScene*		m_physicsScene;
 };

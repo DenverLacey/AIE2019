@@ -28,39 +28,56 @@ bool CollisionResolutionApp::startup() {
 	aie::Gizmos::create(255U, 255U, 65535U, 65535U);
 
 	m_physicsScene = new PhysicsScene();
-	m_physicsScene->setGravity(glm::vec2(0, -30));
+	m_physicsScene->setGravity(glm::vec2(0, -5.f));
 	m_physicsScene->setTimeStep(.01f);
 
-	//auto* b1 = new Sphere(glm::vec2(-40, -20), glm::vec2(10, 5), 1.f, 3.f, glm::vec4(0, 1, 0, 1));
-	//auto* b2 = new Sphere(glm::vec2(40, 20), glm::vec2(-10, -5), 1.f, 3.f, glm::vec4(1, 0, 0, 1));
-	//auto* a1 = new AABB(glm::vec2(-40, 20), glm::vec2(10, -5), 1.f, glm::vec2(3, 3));
-	//auto* a2 = new AABB(glm::vec2(40, -20), glm::vec2(-10, 5), 1.f, glm::vec2(3, 3));
-	//auto* a3 = new AABB(glm::vec2(-40, 30), glm::vec2(0, 0), 1.f, glm::vec2(3, 3));
+	auto* b1 = new Sphere(glm::vec2(-40, -20), glm::vec2(20, 10), 1.f, 3.f, glm::vec4(0, 1, 0, 1));
+	auto* b2 = new Sphere(glm::vec2(40, 20), glm::vec2(-20, -10), 1.f, 3.f, glm::vec4(1, 0, 0, 1));
+	auto* a1 = new AABB(glm::vec2(-40, 20), glm::vec2(20, -10), 1.f, glm::vec2(3, 3));
+	auto* a2 = new AABB(glm::vec2(40, -20), glm::vec2(-20, 10), 1.f, glm::vec2(3, 3));
+	auto* a3 = new AABB(glm::vec2(-40, 30), glm::vec2(0, 0), 1.f, glm::vec2(3, 3));
 
-	//m_physicsScene->addActor(b1);
-	//m_physicsScene->addActor(b2);
-	//m_physicsScene->addActor(a2);
-	//m_physicsScene->addActor(a1);
-	//m_physicsScene->addActor(a3);
+	m_physicsScene->addActor(b1);
+	m_physicsScene->addActor(b2);
+	m_physicsScene->addActor(a2);
+	m_physicsScene->addActor(a1);
+	m_physicsScene->addActor(a3);
 
-	//auto* aC = new AABB(glm::vec2(0, 0), glm::vec2(0, 0), 5.f, glm::vec2(10, 10));
-	//auto* aT = new AABB(glm::vec2(20, 30), glm::vec2(-10, -10), 1.f, glm::vec2(5, 5));
-	//auto* aB = new AABB(glm::vec2(-20, -30), glm::vec2(10, 10), 1.f, glm::vec2(5, 5));
-	//auto* aL = new AABB(glm::vec2(-30, 20), glm::vec2(10, -10), 1.f, glm::vec2(5, 5));
-	//auto* aR = new AABB(glm::vec2(30, -20), glm::vec2(-10, 10), 1.f, glm::vec2(5, 5));
+	auto* aC = new AABB(glm::vec2(0, 0), glm::vec2(0, 0), 5.f, glm::vec2(10, 10));
+	auto* aT = new AABB(glm::vec2(20, 30), glm::vec2(-20, -20), 1.f, glm::vec2(5, 5));
+	auto* aB = new AABB(glm::vec2(-20, -30), glm::vec2(20, 20), 1.f, glm::vec2(5, 5));
+	auto* aL = new AABB(glm::vec2(-30, 20), glm::vec2(20, -20), 1.f, glm::vec2(5, 5));
+	auto* aR = new AABB(glm::vec2(30, -20), glm::vec2(-20, 20), 1.f, glm::vec2(5, 5));
 
-	//m_physicsScene->addActor(aC);
-	//m_physicsScene->addActor(aT);
-	//m_physicsScene->addActor(aB);
-	//m_physicsScene->addActor(aL);
-	//m_physicsScene->addActor(aR);
+	m_physicsScene->addActor(aC);
+	m_physicsScene->addActor(aT);
+	m_physicsScene->addActor(aB);
+	m_physicsScene->addActor(aL);
+	m_physicsScene->addActor(aR);
 
-	auto* plane = new Plane(glm::normalize(glm::vec2(-.25f, .5f)), -50);
-	// auto* plane1 = new Plane()
-	auto* sphere = new Sphere(glm::vec2(40, 20), glm::vec2(0, 0.f), 1.f, 3.f, glm::vec4(0, 1, 0, 1));
-
-	m_physicsScene->addActor(plane);
+	auto* sphere = new Sphere(glm::vec2(40, 40), glm::vec2(0, 0.f), 1.f, 3.f, glm::vec4(1, 1, 0, 1));
 	m_physicsScene->addActor(sphere);
+	
+	auto* pT = new Plane(glm::normalize(glm::vec2(0, -1)), -50);
+	auto* pB = new Plane(glm::normalize(glm::vec2(0, 1)), -50);
+	auto* pL = new Plane(glm::normalize(glm::vec2(1, 0)), -90);
+	auto* pR = new Plane(glm::normalize(glm::vec2(-1, 0)), -90);
+
+	m_physicsScene->addActor(pT);
+	m_physicsScene->addActor(pB);
+	m_physicsScene->addActor(pL);
+	m_physicsScene->addActor(pR);
+	
+	auto* pTR = new Plane(glm::normalize(glm::vec2(-.5f, -.5f)), -80);
+	auto* pBR = new Plane(glm::normalize(glm::vec2(-.5f, .5f)), -80);
+	auto* pTL = new Plane(glm::normalize(glm::vec2(.5f, -.5f)), -80);
+	auto* pBL = new Plane(glm::normalize(glm::vec2(.5f, .5f)), -80);
+
+
+	m_physicsScene->addActor(pTR);
+	m_physicsScene->addActor(pBR);
+	m_physicsScene->addActor(pTL);
+	m_physicsScene->addActor(pBL);
 
 	return true;
 }

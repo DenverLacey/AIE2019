@@ -10,7 +10,7 @@ int main() {
 	auto app = new CollisionDetectionApp();
 
 	// initialise and loop
-	app->run("AIE", 1280, 720, false);
+	app->run("Collision Detection", 1280, 720, false);
 
 	// deallocation
 	delete app;

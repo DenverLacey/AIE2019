@@ -14,6 +14,8 @@ public:
 	void applyForceToActor(Rigidbody* actor2, const glm::vec2& force);
 
 	virtual bool checkCollision(PhysicsObject* pOther) const = 0;
+	static void resolveCollisionDxD(Rigidbody* a, Rigidbody* b, const glm::vec2& normal);
+	static void resolveCollisionDxS(Rigidbody* rb, const glm::vec2& normal);
 
 	glm::vec2 getPosition() const;
 	float getRotation() const;

@@ -15,8 +15,8 @@ public:
 
 	bool checkCollision(PhysicsObject* pOther) const override { return false; }
 
-	const glm::vec2& getMin() const;
-	const glm::vec2& getMax() const;
+	const glm::vec2 getMin() const;
+	const glm::vec2 getMax() const;
 
 	void debug() const override;
 

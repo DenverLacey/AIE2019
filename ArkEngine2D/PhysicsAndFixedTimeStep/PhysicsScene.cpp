@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <list>
 
+#include <Gizmos.h>
+
 #include "Plane.h"
 #include "Sphere.h"
 #include "AABB.h"
@@ -41,8 +43,6 @@ bool PhysicsScene::removeActor(PhysicsObject* actor) {
 
 void PhysicsScene::update(float dt) {
 
-	// static std::list<PhysicsObject*> dirty;
-
 	// update physics at fixed time step
 	static float accumulatedTime = 0.0f;
 	accumulatedTime += dt;
@@ -55,7 +55,6 @@ void PhysicsScene::update(float dt) {
 
 		// check for collisions (ideally you'd want some sort of scene managment in place)
 		checkCollision();
-		// dirty.clear();
 	}
 }
 
@@ -82,19 +81,34 @@ void PhysicsScene::checkCollision()
 			func collisionFnPtr = m_collisionFunctionPrts[funcIndex];
 
 			if (collisionFnPtr != nullptr) {
-				// did collision occur?
-				(*collisionFnPtr)(a, b);
+				glm::vec2 collisionNormal = (*collisionFnPtr)(a, b);
+
+				// if collision
+				if (collisionNormal != glm::zero<glm::vec2>()) {
+					Rigidbody* aRb = dynamic_cast<Rigidbody*>(a);
+					Rigidbody* bRb = dynamic_cast<Rigidbody*>(b);
+
+					if (aRb != nullptr && bRb != nullptr) {
+						Rigidbody::resolveCollisionDxD(aRb, bRb, collisionNormal);
+					}
+					else if (aRb != nullptr && bRb == nullptr) {
+						Rigidbody::resolveCollisionDxS(aRb, collisionNormal);
+					}
+					else {
+						Rigidbody::resolveCollisionDxS(bRb, collisionNormal);
+					}
+				}
 			}
 		}
 	}
 }
 
-bool PhysicsScene::plane2Plane(PhysicsObject* a, PhysicsObject* b)
+glm::vec2 PhysicsScene::plane2Plane(PhysicsObject* a, PhysicsObject* b)
 {
-	return false;
+	return glm::zero<glm::vec2>();
 }
 
-bool PhysicsScene::plane2Sphere(PhysicsObject* a, PhysicsObject* b)
+glm::vec2 PhysicsScene::plane2Sphere(PhysicsObject* a, PhysicsObject* b)
 {
 	Plane* plane = dynamic_cast<Plane*>(a);
 	Sphere* sphere = dynamic_cast<Sphere*>(b);
@@ -114,25 +128,48 @@ bool PhysicsScene::plane2Sphere(PhysicsObject* a, PhysicsObject* b)
 		float intersection = sphere->getRadius() - sphereToPlane;
 
 		if (intersection > 0) {
-			// add resolution later
-			sphere->applyForce(-sphere->getVelocity() * sphere->getMass());
-			return true;
+			return collisionNormal;
 		}
 	}
-	return false;
+	return glm::zero<glm::vec2>();
 }
 
-bool PhysicsScene::plane2Box(PhysicsObject* a, PhysicsObject* b)
+glm::vec2 PhysicsScene::plane2Box(PhysicsObject* a, PhysicsObject* b)
 {
-	return false;
+	Plane* plane = dynamic_cast<Plane*>(a);
+	AABB* box = dynamic_cast<AABB*>(b);
+
+	if (plane != nullptr && box != nullptr) {
+		bool sides[2]{ false, false };
+		glm::vec2 corners[4]{
+			glm::vec2(box->getMin()),						// bottom left
+			glm::vec2(box->getMin().x, box->getMax().y),	// top left
+			glm::vec2(box->getMax()),						// top right
+			glm::vec2(box->getMax().x, box->getMin().y)		// bottom right
+		};
+
+		for (unsigned int i = 0; i < 4; i++) {
+			if (glm::dot(plane->getNormal(), corners[i]) - plane->getDistance() <= 0) {
+				sides[0] = true;
+			}
+			else if (glm::dot(plane->getNormal(), corners[i]) - plane->getDistance() >= 0) {
+				sides[1] = true;
+			}
+		}
+
+		if (sides[0] && sides[1]) {
+			return plane->getNormal();
+		}
+	}
+	return glm::zero<glm::vec2>();
 }
 
-bool PhysicsScene::sphere2Plane(PhysicsObject* a, PhysicsObject* b)
+glm::vec2 PhysicsScene::sphere2Plane(PhysicsObject* a, PhysicsObject* b)
 {
 	return plane2Sphere(b, a);
 }
 
-bool PhysicsScene::sphere2Sphere(PhysicsObject* a, PhysicsObject* b)
+glm::vec2 PhysicsScene::sphere2Sphere(PhysicsObject* a, PhysicsObject* b)
 {
 	Sphere* sphere1 = dynamic_cast<Sphere*>(a);
 	Sphere* sphere2 = dynamic_cast<Sphere*>(b);
@@ -142,32 +179,43 @@ bool PhysicsScene::sphere2Sphere(PhysicsObject* a, PhysicsObject* b)
 		float combinedRadius = sphere1->getRadius() + sphere2->getRadius();
 
 		if (distance <= combinedRadius) {
-			// adding collision resolution later
-			sphere1->applyForce(-sphere1->getVelocity());
-			sphere2->applyForce(-sphere2->getVelocity());
-
-			return true;
+			glm::vec2 normal = glm::normalize(sphere2->getPosition() - sphere1->getPosition());
+			return normal;
 		}
 	}
-	return false;
+	return glm::zero<glm::vec2>();
 }
 
-bool PhysicsScene::sphere2Box(PhysicsObject* a, PhysicsObject* b)
+glm::vec2 PhysicsScene::sphere2Box(PhysicsObject* a, PhysicsObject* b)
 {
-	return false;
+	Sphere* sphere = dynamic_cast<Sphere*>(a);
+	AABB* box = dynamic_cast<AABB*>(b);
+
+	if (sphere != nullptr && box != nullptr) {
+		glm::vec2 clampPoint = sphere->getPosition();
+		clampPoint = glm::clamp(clampPoint, box->getMin(), box->getMax());
+
+		float distanceToPoint = glm::distance(sphere->getPosition(), clampPoint);
+
+		if (distanceToPoint <= sphere->getRadius()) {
+			glm::vec2 normal = glm::normalize(clampPoint - sphere->getPosition());
+			return normal;
+		}
+	}
+	return glm::zero<glm::vec2>();
 }
 
-bool PhysicsScene::box2Plane(PhysicsObject* a, PhysicsObject* b)
+glm::vec2 PhysicsScene::box2Plane(PhysicsObject* a, PhysicsObject* b)
 {
-	return false;
+	return plane2Box(b, a);
 }
 
-bool PhysicsScene::box2Sphere(PhysicsObject* a, PhysicsObject* b)
+glm::vec2 PhysicsScene::box2Sphere(PhysicsObject* a, PhysicsObject* b)
 {
-	return false;
+	return sphere2Box(b, a);
 }
 
-bool PhysicsScene::box2Box(PhysicsObject* a, PhysicsObject* b)
+glm::vec2 PhysicsScene::box2Box(PhysicsObject* a, PhysicsObject* b)
 {
 	AABB* box1 = dynamic_cast<AABB*>(a);
 	AABB* box2 = dynamic_cast<AABB*>(b);
@@ -184,19 +232,23 @@ bool PhysicsScene::box2Box(PhysicsObject* a, PhysicsObject* b)
 			aMin.y < bMax.y &&
 			aMax.y > bMin.y) 
 		{
-			box1->applyForce(-box1->getVelocity() * box1->getMass());
-			box2->applyForce(-box2->getVelocity() * box2->getMass());
-			return true;
+			glm::vec2 roughNormal = glm::normalize(box2->getPosition() - box1->getPosition());
+
+			if (abs(roughNormal.x) > abs(roughNormal.y)) { roughNormal.y = 0; }
+			else { roughNormal.x = 0; }
+
+			glm::vec2 normal = glm::normalize(roughNormal);
+			return normal;
 		}
 	}
-	return false;
+	return glm::zero<glm::vec2>();
 }
 
 void PhysicsScene::setGravity(const glm::vec2& gravity) {
 	m_gravity = gravity;
 }
 
-glm::vec2 PhysicsScene::getGravity() const {
+const glm::vec2& PhysicsScene::getGravity() const {
 	return m_gravity;
 }
 

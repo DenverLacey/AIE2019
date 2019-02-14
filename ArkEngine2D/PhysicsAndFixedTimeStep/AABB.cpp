@@ -29,12 +29,12 @@ void AABB::resetPosition()
 	m_position = glm::vec2(0, 0);
 }
 
-const glm::vec2& AABB::getMin() const
+const glm::vec2 AABB::getMin() const
 {
 	return m_position - m_extents;
 }
 
-const glm::vec2& AABB::getMax() const
+const glm::vec2 AABB::getMax() const
 {
 	return m_position + m_extents;
 }

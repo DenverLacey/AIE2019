@@ -18,20 +18,20 @@ public:
 
 	void checkCollision();
 
-	static bool plane2Plane(PhysicsObject* a, PhysicsObject* b);
-	static bool plane2Sphere(PhysicsObject* a, PhysicsObject* b);
-	static bool plane2Box(PhysicsObject* a, PhysicsObject* b);
-	
-	static bool sphere2Plane(PhysicsObject* a, PhysicsObject* b);
-	static bool sphere2Sphere(PhysicsObject* a, PhysicsObject* b);
-	static bool sphere2Box(PhysicsObject* a, PhysicsObject* b);
-
-	static bool box2Plane(PhysicsObject* a, PhysicsObject* b);
-	static bool box2Sphere(PhysicsObject* a, PhysicsObject* b);
-	static bool box2Box(PhysicsObject* a, PhysicsObject* b);
+	static glm::vec2 plane2Plane(PhysicsObject* a, PhysicsObject* b);
+	static glm::vec2 plane2Sphere(PhysicsObject* a, PhysicsObject* b);
+	static glm::vec2 plane2Box(PhysicsObject* a, PhysicsObject* b);
+		  
+	static glm::vec2 sphere2Plane(PhysicsObject* a, PhysicsObject* b);
+	static glm::vec2 sphere2Sphere(PhysicsObject* a, PhysicsObject* b);
+	static glm::vec2 sphere2Box(PhysicsObject* a, PhysicsObject* b);
+		  
+	static glm::vec2 box2Plane(PhysicsObject* a, PhysicsObject* b);
+	static glm::vec2 box2Sphere(PhysicsObject* a, PhysicsObject* b);
+	static glm::vec2 box2Box(PhysicsObject* a, PhysicsObject* b);
 
 	void setGravity(const glm::vec2& gravity);
-	glm::vec2 getGravity() const;
+	const glm::vec2& getGravity() const;
 
 	void setTimeStep(const float timeStep);
 	float getTimeStep() const;
@@ -44,7 +44,7 @@ protected:
 	std::vector<PhysicsObject*> m_actors;
 
 
-	typedef bool(*func)(PhysicsObject*, PhysicsObject*);
+	typedef glm::vec2(*func)(PhysicsObject*, PhysicsObject*);
 	func m_collisionFunctionPrts[9] {
 		plane2Plane,
 		plane2Sphere,
